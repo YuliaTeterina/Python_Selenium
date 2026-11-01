@@ -23,7 +23,7 @@ class ProductPage(BasePage):
 
     SUCCESS_MESSAGE = (
         By.CSS_SELECTOR,
-        "div.alert-success"
+        "div.alert-success strong"
     )
 
     BASKET_TOTAL_MESSAGE = (
@@ -40,21 +40,19 @@ class ProductPage(BasePage):
     def get_product_name(self):
         return self.browser.find_element(
             *self.PRODUCT_NAME
-    ).text
-
+        ).text
 
     def get_product_price(self):
         return self.browser.find_element(
             *self.PRODUCT_PRICE
-    ).text
+        ).text
 
     def should_be_success_message(self, product_name):
         message = self.browser.find_element(
             *self.SUCCESS_MESSAGE
         ).text
 
-        assert product_name in message
-
+        assert product_name == message
 
     def should_be_basket_total(self, product_price):
         message = self.browser.find_element(
